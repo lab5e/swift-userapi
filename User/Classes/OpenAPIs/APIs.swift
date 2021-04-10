@@ -7,7 +7,7 @@
 import Foundation
 
 open class UserAPI {
-    public static var basePath = "https://api.lab5e.com/user"
+    public static var basePath = "https://api.lab5e.com"
     public static var credential: URLCredential?
     public static var customHeaders: [String: String] = [:]
     public static var requestBuilderFactory: RequestBuilderFactory = URLSessionRequestBuilderFactory()

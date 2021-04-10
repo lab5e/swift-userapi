@@ -1,6 +1,6 @@
 # ProfileAPI
 
-All URIs are relative to *https://api.lab5e.com/user*
+All URIs are relative to *https://api.lab5e.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
