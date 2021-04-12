@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 
 # **userDeleteToken**
 ```swift
-    open class func userDeleteToken(token: String, completion: @escaping (_ data: Any?, _ error: Error?) -> Void)
+    open class func userDeleteToken(token: String, completion: @escaping (_ data: DeleteTokenResponse?, _ error: Error?) -> Void)
 ```
 
 Remove token
@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Any**
+[**DeleteTokenResponse**](DeleteTokenResponse.md)
 
 ### Authorization
 

@@ -120,7 +120,7 @@ Name | Type | Description  | Notes
 
 # **userDeleteInvite**
 ```swift
-    open class func userDeleteInvite(teamId: String, code: String, completion: @escaping (_ data: Any?, _ error: Error?) -> Void)
+    open class func userDeleteInvite(teamId: String, code: String, completion: @escaping (_ data: DeleteInviteResponse?, _ error: Error?) -> Void)
 ```
 
 Delete invite
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Any**
+[**DeleteInviteResponse**](DeleteInviteResponse.md)
 
 ### Authorization
 

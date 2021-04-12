@@ -60,7 +60,7 @@ open class TokensAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userDeleteToken(token: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Any?, _ error: Error?) -> Void)) {
+    open class func userDeleteToken(token: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: DeleteTokenResponse?, _ error: Error?) -> Void)) {
         userDeleteTokenWithRequestBuilder(token: token).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
@@ -78,9 +78,9 @@ open class TokensAPI {
        - type: apiKey X-API-Token 
        - name: APIToken
      - parameter token: (path) The token to delete. 
-     - returns: RequestBuilder<Any> 
+     - returns: RequestBuilder<DeleteTokenResponse> 
      */
-    open class func userDeleteTokenWithRequestBuilder(token: String) -> RequestBuilder<Any> {
+    open class func userDeleteTokenWithRequestBuilder(token: String) -> RequestBuilder<DeleteTokenResponse> {
         var path = "/user/tokens/{token}"
         let tokenPreEscape = "\(APIHelper.mapValueToPathItem(token))"
         let tokenPostEscape = tokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -96,7 +96,7 @@ open class TokensAPI {
 
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<Any>.Type = UserAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<DeleteTokenResponse>.Type = UserAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
