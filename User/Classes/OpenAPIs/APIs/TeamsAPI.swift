@@ -107,7 +107,7 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userDeleteInvite(teamId: String, code: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: DeleteInviteResponse?, _ error: Error?) -> Void)) {
+    open class func userDeleteInvite(teamId: String, code: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Any?, _ error: Error?) -> Void)) {
         userDeleteInviteWithRequestBuilder(teamId: teamId, code: code).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
@@ -127,9 +127,9 @@ open class TeamsAPI {
        - name: APIToken
      - parameter teamId: (path) The team ID 
      - parameter code: (path) The invite code. 
-     - returns: RequestBuilder<DeleteInviteResponse> 
+     - returns: RequestBuilder<Any> 
      */
-    open class func userDeleteInviteWithRequestBuilder(teamId: String, code: String) -> RequestBuilder<DeleteInviteResponse> {
+    open class func userDeleteInviteWithRequestBuilder(teamId: String, code: String) -> RequestBuilder<Any> {
         var path = "/user/teams/{teamId}/invites/{code}"
         let teamIdPreEscape = "\(APIHelper.mapValueToPathItem(teamId))"
         let teamIdPostEscape = teamIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -148,7 +148,7 @@ open class TeamsAPI {
 
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<DeleteInviteResponse>.Type = UserAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<Any>.Type = UserAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
