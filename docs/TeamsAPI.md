@@ -4,25 +4,25 @@ All URIs are relative to *https://api.lab5e.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**userAcceptInvite**](TeamsAPI.md#useracceptinvite) | **POST** /user/teams/accept | Accept invite
-[**userCreateTeam**](TeamsAPI.md#usercreateteam) | **POST** /user/teams | Create team
-[**userDeleteInvite**](TeamsAPI.md#userdeleteinvite) | **DELETE** /user/teams/{teamId}/invites/{code} | Delete invite
-[**userDeleteMember**](TeamsAPI.md#userdeletemember) | **DELETE** /user/teams/{teamId}/members/{userId} | Remove member
-[**userDeleteTeam**](TeamsAPI.md#userdeleteteam) | **DELETE** /user/teams/{teamId} | Remove team
-[**userGenerateInvite**](TeamsAPI.md#usergenerateinvite) | **POST** /user/teams/{teamId}/invites | Generate invite
-[**userListInvites**](TeamsAPI.md#userlistinvites) | **GET** /user/teams/{teamId}/invites | List invites
-[**userListTeams**](TeamsAPI.md#userlistteams) | **GET** /user/teams | List teams
-[**userRetrieveInvite**](TeamsAPI.md#userretrieveinvite) | **GET** /user/teams/{teamId}/invites/{code} | Retrieve invite
-[**userRetrieveMember**](TeamsAPI.md#userretrievemember) | **GET** /user/teams/{teamId}/members/{userId} | Retrieve member
-[**userRetrieveTeam**](TeamsAPI.md#userretrieveteam) | **GET** /user/teams/{teamId} | Retrieve team
-[**userRetrieveTeamMembers**](TeamsAPI.md#userretrieveteammembers) | **GET** /user/teams/{teamId}/members | List members
-[**userUpdateMember**](TeamsAPI.md#userupdatemember) | **PATCH** /user/teams/{teamId}/members/{userId} | Update member
-[**userUpdateTeam**](TeamsAPI.md#userupdateteam) | **PATCH** /user/teams/{teamId} | Update team
+[**acceptInvite**](TeamsAPI.md#acceptinvite) | **POST** /user/teams/accept | Accept invite
+[**createTeam**](TeamsAPI.md#createteam) | **POST** /user/teams | Create team
+[**deleteInvite**](TeamsAPI.md#deleteinvite) | **DELETE** /user/teams/{teamId}/invites/{code} | Delete invite
+[**deleteMember**](TeamsAPI.md#deletemember) | **DELETE** /user/teams/{teamId}/members/{userId} | Remove member
+[**deleteTeam**](TeamsAPI.md#deleteteam) | **DELETE** /user/teams/{teamId} | Remove team
+[**generateInvite**](TeamsAPI.md#generateinvite) | **POST** /user/teams/{teamId}/invites | Generate invite
+[**listInvites**](TeamsAPI.md#listinvites) | **GET** /user/teams/{teamId}/invites | List invites
+[**listTeams**](TeamsAPI.md#listteams) | **GET** /user/teams | List teams
+[**retrieveInvite**](TeamsAPI.md#retrieveinvite) | **GET** /user/teams/{teamId}/invites/{code} | Retrieve invite
+[**retrieveMember**](TeamsAPI.md#retrievemember) | **GET** /user/teams/{teamId}/members/{userId} | Retrieve member
+[**retrieveTeam**](TeamsAPI.md#retrieveteam) | **GET** /user/teams/{teamId} | Retrieve team
+[**retrieveTeamMembers**](TeamsAPI.md#retrieveteammembers) | **GET** /user/teams/{teamId}/members | List members
+[**updateMember**](TeamsAPI.md#updatemember) | **PATCH** /user/teams/{teamId}/members/{userId} | Update member
+[**updateTeam**](TeamsAPI.md#updateteam) | **PATCH** /user/teams/{teamId} | Update team
 
 
-# **userAcceptInvite**
+# **acceptInvite**
 ```swift
-    open class func userAcceptInvite(body: AcceptInviteRequest, completion: @escaping (_ data: Team?, _ error: Error?) -> Void)
+    open class func acceptInvite(body: AcceptInviteRequest, completion: @escaping (_ data: Team?, _ error: Error?) -> Void)
 ```
 
 Accept invite
@@ -37,7 +37,7 @@ import User
 let body = AcceptInviteRequest(code: "code_example") // AcceptInviteRequest | 
 
 // Accept invite
-TeamsAPI.userAcceptInvite(body: body) { (response, error) in
+TeamsAPI.acceptInvite(body: body) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -70,9 +70,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userCreateTeam**
+# **createTeam**
 ```swift
-    open class func userCreateTeam(body: Team, completion: @escaping (_ data: Team?, _ error: Error?) -> Void)
+    open class func createTeam(body: Team, completion: @escaping (_ data: Team?, _ error: Error?) -> Void)
 ```
 
 Create team
@@ -85,7 +85,7 @@ import User
 let body = Team(teamId: "teamId_example", isPrivate: false, tags: "TODO", members: [Member(teamId: "teamId_example", role: "role_example", userId: "userId_example", user: UserProfile(userId: "userId_example", email: "email_example", avatarUrl: "avatarUrl_example", name: "name_example", profileUrl: "profileUrl_example", githubLogin: "githubLogin_example", provider: "provider_example", logoutUrl: "logoutUrl_example"))]) // Team | 
 
 // Create team
-TeamsAPI.userCreateTeam(body: body) { (response, error) in
+TeamsAPI.createTeam(body: body) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -118,9 +118,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userDeleteInvite**
+# **deleteInvite**
 ```swift
-    open class func userDeleteInvite(teamId: String, code: String, completion: @escaping (_ data: Any?, _ error: Error?) -> Void)
+    open class func deleteInvite(teamId: String, code: String, completion: @escaping (_ data: DeleteInviteResponse?, _ error: Error?) -> Void)
 ```
 
 Delete invite
@@ -136,7 +136,7 @@ let teamId = "teamId_example" // String | The team ID
 let code = "code_example" // String | The invite code.
 
 // Delete invite
-TeamsAPI.userDeleteInvite(teamId: teamId, code: code) { (response, error) in
+TeamsAPI.deleteInvite(teamId: teamId, code: code) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Any**
+[**DeleteInviteResponse**](DeleteInviteResponse.md)
 
 ### Authorization
 
@@ -170,9 +170,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userDeleteMember**
+# **deleteMember**
 ```swift
-    open class func userDeleteMember(teamId: String, userId: String, completion: @escaping (_ data: Member?, _ error: Error?) -> Void)
+    open class func deleteMember(teamId: String, userId: String, completion: @escaping (_ data: Member?, _ error: Error?) -> Void)
 ```
 
 Remove member
@@ -188,7 +188,7 @@ let teamId = "teamId_example" // String | The team ID
 let userId = "userId_example" // String | The user ID
 
 // Remove member
-TeamsAPI.userDeleteMember(teamId: teamId, userId: userId) { (response, error) in
+TeamsAPI.deleteMember(teamId: teamId, userId: userId) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -222,9 +222,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userDeleteTeam**
+# **deleteTeam**
 ```swift
-    open class func userDeleteTeam(teamId: String, completion: @escaping (_ data: Team?, _ error: Error?) -> Void)
+    open class func deleteTeam(teamId: String, completion: @escaping (_ data: Team?, _ error: Error?) -> Void)
 ```
 
 Remove team
@@ -239,7 +239,7 @@ import User
 let teamId = "teamId_example" // String | The team ID
 
 // Remove team
-TeamsAPI.userDeleteTeam(teamId: teamId) { (response, error) in
+TeamsAPI.deleteTeam(teamId: teamId) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -272,9 +272,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userGenerateInvite**
+# **generateInvite**
 ```swift
-    open class func userGenerateInvite(teamId: String, body: InviteRequest, completion: @escaping (_ data: Invite?, _ error: Error?) -> Void)
+    open class func generateInvite(teamId: String, body: InviteRequest, completion: @escaping (_ data: Invite?, _ error: Error?) -> Void)
 ```
 
 Generate invite
@@ -290,7 +290,7 @@ let teamId = "teamId_example" // String | The team ID
 let body = InviteRequest(teamId: "teamId_example", code: "code_example") // InviteRequest | 
 
 // Generate invite
-TeamsAPI.userGenerateInvite(teamId: teamId, body: body) { (response, error) in
+TeamsAPI.generateInvite(teamId: teamId, body: body) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -324,9 +324,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userListInvites**
+# **listInvites**
 ```swift
-    open class func userListInvites(teamId: String, completion: @escaping (_ data: InviteList?, _ error: Error?) -> Void)
+    open class func listInvites(teamId: String, completion: @escaping (_ data: InviteList?, _ error: Error?) -> Void)
 ```
 
 List invites
@@ -341,7 +341,7 @@ import User
 let teamId = "teamId_example" // String | The team ID
 
 // List invites
-TeamsAPI.userListInvites(teamId: teamId) { (response, error) in
+TeamsAPI.listInvites(teamId: teamId) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -374,9 +374,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userListTeams**
+# **listTeams**
 ```swift
-    open class func userListTeams(completion: @escaping (_ data: TeamList?, _ error: Error?) -> Void)
+    open class func listTeams(completion: @escaping (_ data: TeamList?, _ error: Error?) -> Void)
 ```
 
 List teams
@@ -390,7 +390,7 @@ import User
 
 
 // List teams
-TeamsAPI.userListTeams() { (response, error) in
+TeamsAPI.listTeams() { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -420,9 +420,9 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userRetrieveInvite**
+# **retrieveInvite**
 ```swift
-    open class func userRetrieveInvite(teamId: String, code: String, completion: @escaping (_ data: Invite?, _ error: Error?) -> Void)
+    open class func retrieveInvite(teamId: String, code: String, completion: @escaping (_ data: Invite?, _ error: Error?) -> Void)
 ```
 
 Retrieve invite
@@ -438,7 +438,7 @@ let teamId = "teamId_example" // String | The team ID
 let code = "code_example" // String | The invite code.
 
 // Retrieve invite
-TeamsAPI.userRetrieveInvite(teamId: teamId, code: code) { (response, error) in
+TeamsAPI.retrieveInvite(teamId: teamId, code: code) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -472,9 +472,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userRetrieveMember**
+# **retrieveMember**
 ```swift
-    open class func userRetrieveMember(teamId: String, userId: String, completion: @escaping (_ data: Member?, _ error: Error?) -> Void)
+    open class func retrieveMember(teamId: String, userId: String, completion: @escaping (_ data: Member?, _ error: Error?) -> Void)
 ```
 
 Retrieve member
@@ -488,7 +488,7 @@ let teamId = "teamId_example" // String | The team ID
 let userId = "userId_example" // String | The user ID
 
 // Retrieve member
-TeamsAPI.userRetrieveMember(teamId: teamId, userId: userId) { (response, error) in
+TeamsAPI.retrieveMember(teamId: teamId, userId: userId) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -522,9 +522,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userRetrieveTeam**
+# **retrieveTeam**
 ```swift
-    open class func userRetrieveTeam(teamId: String, completion: @escaping (_ data: Team?, _ error: Error?) -> Void)
+    open class func retrieveTeam(teamId: String, completion: @escaping (_ data: Team?, _ error: Error?) -> Void)
 ```
 
 Retrieve team
@@ -537,7 +537,7 @@ import User
 let teamId = "teamId_example" // String | The team ID
 
 // Retrieve team
-TeamsAPI.userRetrieveTeam(teamId: teamId) { (response, error) in
+TeamsAPI.retrieveTeam(teamId: teamId) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -570,9 +570,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userRetrieveTeamMembers**
+# **retrieveTeamMembers**
 ```swift
-    open class func userRetrieveTeamMembers(teamId: String, completion: @escaping (_ data: MemberList?, _ error: Error?) -> Void)
+    open class func retrieveTeamMembers(teamId: String, completion: @escaping (_ data: MemberList?, _ error: Error?) -> Void)
 ```
 
 List members
@@ -585,7 +585,7 @@ import User
 let teamId = "teamId_example" // String | The team ID
 
 // List members
-TeamsAPI.userRetrieveTeamMembers(teamId: teamId) { (response, error) in
+TeamsAPI.retrieveTeamMembers(teamId: teamId) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -618,9 +618,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userUpdateMember**
+# **updateMember**
 ```swift
-    open class func userUpdateMember(teamId: String, userId: String, body: Member, completion: @escaping (_ data: Member?, _ error: Error?) -> Void)
+    open class func updateMember(teamId: String, userId: String, body: Member, completion: @escaping (_ data: Member?, _ error: Error?) -> Void)
 ```
 
 Update member
@@ -637,7 +637,7 @@ let userId = "userId_example" // String |
 let body = Member(teamId: "teamId_example", role: "role_example", userId: "userId_example", user: UserProfile(userId: "userId_example", email: "email_example", avatarUrl: "avatarUrl_example", name: "name_example", profileUrl: "profileUrl_example", githubLogin: "githubLogin_example", provider: "provider_example", logoutUrl: "logoutUrl_example")) // Member | 
 
 // Update member
-TeamsAPI.userUpdateMember(teamId: teamId, userId: userId, body: body) { (response, error) in
+TeamsAPI.updateMember(teamId: teamId, userId: userId, body: body) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -672,9 +672,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userUpdateTeam**
+# **updateTeam**
 ```swift
-    open class func userUpdateTeam(teamId: String, body: Team, completion: @escaping (_ data: Team?, _ error: Error?) -> Void)
+    open class func updateTeam(teamId: String, body: Team, completion: @escaping (_ data: Team?, _ error: Error?) -> Void)
 ```
 
 Update team
@@ -690,7 +690,7 @@ let teamId = "teamId_example" // String |
 let body = Team(teamId: "teamId_example", isPrivate: false, tags: "TODO", members: [Member(teamId: "teamId_example", role: "role_example", userId: "userId_example", user: UserProfile(userId: "userId_example", email: "email_example", avatarUrl: "avatarUrl_example", name: "name_example", profileUrl: "profileUrl_example", githubLogin: "githubLogin_example", provider: "provider_example", logoutUrl: "logoutUrl_example"))]) // Team | 
 
 // Update team
-TeamsAPI.userUpdateTeam(teamId: teamId, body: body) { (response, error) in
+TeamsAPI.updateTeam(teamId: teamId, body: body) { (response, error) in
     guard error == nil else {
         print(error)
         return

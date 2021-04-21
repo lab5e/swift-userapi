@@ -4,16 +4,16 @@ All URIs are relative to *https://api.lab5e.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**userCreateToken**](TokensAPI.md#usercreatetoken) | **POST** /user/tokens | Create token
-[**userDeleteToken**](TokensAPI.md#userdeletetoken) | **DELETE** /user/tokens/{token} | Remove token
-[**userListTokens**](TokensAPI.md#userlisttokens) | **GET** /user/tokens | List tokens
-[**userRetrieveToken**](TokensAPI.md#userretrievetoken) | **GET** /user/tokens/{token} | Retrieve token
-[**userUpdateToken**](TokensAPI.md#userupdatetoken) | **PATCH** /user/tokens/{token} | Update token
+[**createToken**](TokensAPI.md#createtoken) | **POST** /user/tokens | Create token
+[**deleteToken**](TokensAPI.md#deletetoken) | **DELETE** /user/tokens/{token} | Remove token
+[**listTokens**](TokensAPI.md#listtokens) | **GET** /user/tokens | List tokens
+[**retrieveToken**](TokensAPI.md#retrievetoken) | **GET** /user/tokens/{token} | Retrieve token
+[**updateToken**](TokensAPI.md#updatetoken) | **PATCH** /user/tokens/{token} | Update token
 
 
-# **userCreateToken**
+# **createToken**
 ```swift
-    open class func userCreateToken(body: Token, completion: @escaping (_ data: Token?, _ error: Error?) -> Void)
+    open class func createToken(body: Token, completion: @escaping (_ data: Token?, _ error: Error?) -> Void)
 ```
 
 Create token
@@ -26,7 +26,7 @@ import User
 let body = Token(resource: "resource_example", write: false, token: "token_example", tags: "TODO", lastUse: "lastUse_example", uses: "uses_example") // Token | 
 
 // Create token
-TokensAPI.userCreateToken(body: body) { (response, error) in
+TokensAPI.createToken(body: body) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -59,9 +59,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userDeleteToken**
+# **deleteToken**
 ```swift
-    open class func userDeleteToken(token: String, completion: @escaping (_ data: Any?, _ error: Error?) -> Void)
+    open class func deleteToken(token: String, completion: @escaping (_ data: DeleteTokenResponse?, _ error: Error?) -> Void)
 ```
 
 Remove token
@@ -74,7 +74,7 @@ import User
 let token = "token_example" // String | The token to delete.
 
 // Remove token
-TokensAPI.userDeleteToken(token: token) { (response, error) in
+TokensAPI.deleteToken(token: token) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Any**
+[**DeleteTokenResponse**](DeleteTokenResponse.md)
 
 ### Authorization
 
@@ -107,9 +107,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userListTokens**
+# **listTokens**
 ```swift
-    open class func userListTokens(completion: @escaping (_ data: TokenList?, _ error: Error?) -> Void)
+    open class func listTokens(completion: @escaping (_ data: TokenList?, _ error: Error?) -> Void)
 ```
 
 List tokens
@@ -121,7 +121,7 @@ import User
 
 
 // List tokens
-TokensAPI.userListTokens() { (response, error) in
+TokensAPI.listTokens() { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -151,9 +151,9 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userRetrieveToken**
+# **retrieveToken**
 ```swift
-    open class func userRetrieveToken(token: String, completion: @escaping (_ data: Token?, _ error: Error?) -> Void)
+    open class func retrieveToken(token: String, completion: @escaping (_ data: Token?, _ error: Error?) -> Void)
 ```
 
 Retrieve token
@@ -166,7 +166,7 @@ import User
 let token = "token_example" // String | 
 
 // Retrieve token
-TokensAPI.userRetrieveToken(token: token) { (response, error) in
+TokensAPI.retrieveToken(token: token) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -199,9 +199,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **userUpdateToken**
+# **updateToken**
 ```swift
-    open class func userUpdateToken(token: String, body: Token, completion: @escaping (_ data: Token?, _ error: Error?) -> Void)
+    open class func updateToken(token: String, body: Token, completion: @escaping (_ data: Token?, _ error: Error?) -> Void)
 ```
 
 Update token
@@ -215,7 +215,7 @@ let token = "token_example" // String | The token  Use this in the `X-API-Token`
 let body = Token(resource: "resource_example", write: false, token: "token_example", tags: "TODO", lastUse: "lastUse_example", uses: "uses_example") // Token | 
 
 // Update token
-TokensAPI.userUpdateToken(token: token, body: body) { (response, error) in
+TokensAPI.updateToken(token: token, body: body) { (response, error) in
     guard error == nil else {
         print(error)
         return

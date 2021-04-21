@@ -14,8 +14,8 @@ open class ProfileAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userGetUserProfile(apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: UserProfile?, _ error: Error?) -> Void)) {
-        userGetUserProfileWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+    open class func getUserProfile(apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: UserProfile?, _ error: Error?) -> Void)) {
+        getUserProfileWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -34,7 +34,7 @@ open class ProfileAPI {
        - name: APIToken
      - returns: RequestBuilder<UserProfile> 
      */
-    open class func userGetUserProfileWithRequestBuilder() -> RequestBuilder<UserProfile> {
+    open class func getUserProfileWithRequestBuilder() -> RequestBuilder<UserProfile> {
         let path = "/user/profile"
         let URLString = UserAPI.basePath + path
         let parameters: [String: Any]? = nil

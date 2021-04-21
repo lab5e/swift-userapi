@@ -15,8 +15,8 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userAcceptInvite(body: AcceptInviteRequest, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Team?, _ error: Error?) -> Void)) {
-        userAcceptInviteWithRequestBuilder(body: body).execute(apiResponseQueue) { result -> Void in
+    open class func acceptInvite(body: AcceptInviteRequest, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Team?, _ error: Error?) -> Void)) {
+        acceptInviteWithRequestBuilder(body: body).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -36,7 +36,7 @@ open class TeamsAPI {
      - parameter body: (body)  
      - returns: RequestBuilder<Team> 
      */
-    open class func userAcceptInviteWithRequestBuilder(body: AcceptInviteRequest) -> RequestBuilder<Team> {
+    open class func acceptInviteWithRequestBuilder(body: AcceptInviteRequest) -> RequestBuilder<Team> {
         let path = "/user/teams/accept"
         let URLString = UserAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
@@ -61,8 +61,8 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userCreateTeam(body: Team, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Team?, _ error: Error?) -> Void)) {
-        userCreateTeamWithRequestBuilder(body: body).execute(apiResponseQueue) { result -> Void in
+    open class func createTeam(body: Team, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Team?, _ error: Error?) -> Void)) {
+        createTeamWithRequestBuilder(body: body).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -81,7 +81,7 @@ open class TeamsAPI {
      - parameter body: (body)  
      - returns: RequestBuilder<Team> 
      */
-    open class func userCreateTeamWithRequestBuilder(body: Team) -> RequestBuilder<Team> {
+    open class func createTeamWithRequestBuilder(body: Team) -> RequestBuilder<Team> {
         let path = "/user/teams"
         let URLString = UserAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
@@ -107,8 +107,8 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userDeleteInvite(teamId: String, code: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Any?, _ error: Error?) -> Void)) {
-        userDeleteInviteWithRequestBuilder(teamId: teamId, code: code).execute(apiResponseQueue) { result -> Void in
+    open class func deleteInvite(teamId: String, code: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: DeleteInviteResponse?, _ error: Error?) -> Void)) {
+        deleteInviteWithRequestBuilder(teamId: teamId, code: code).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -127,9 +127,9 @@ open class TeamsAPI {
        - name: APIToken
      - parameter teamId: (path) The team ID 
      - parameter code: (path) The invite code. 
-     - returns: RequestBuilder<Any> 
+     - returns: RequestBuilder<DeleteInviteResponse> 
      */
-    open class func userDeleteInviteWithRequestBuilder(teamId: String, code: String) -> RequestBuilder<Any> {
+    open class func deleteInviteWithRequestBuilder(teamId: String, code: String) -> RequestBuilder<DeleteInviteResponse> {
         var path = "/user/teams/{teamId}/invites/{code}"
         let teamIdPreEscape = "\(APIHelper.mapValueToPathItem(teamId))"
         let teamIdPostEscape = teamIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -148,7 +148,7 @@ open class TeamsAPI {
 
         let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        let requestBuilder: RequestBuilder<Any>.Type = UserAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<DeleteInviteResponse>.Type = UserAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
@@ -161,8 +161,8 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userDeleteMember(teamId: String, userId: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Member?, _ error: Error?) -> Void)) {
-        userDeleteMemberWithRequestBuilder(teamId: teamId, userId: userId).execute(apiResponseQueue) { result -> Void in
+    open class func deleteMember(teamId: String, userId: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Member?, _ error: Error?) -> Void)) {
+        deleteMemberWithRequestBuilder(teamId: teamId, userId: userId).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -183,7 +183,7 @@ open class TeamsAPI {
      - parameter userId: (path) The user ID 
      - returns: RequestBuilder<Member> 
      */
-    open class func userDeleteMemberWithRequestBuilder(teamId: String, userId: String) -> RequestBuilder<Member> {
+    open class func deleteMemberWithRequestBuilder(teamId: String, userId: String) -> RequestBuilder<Member> {
         var path = "/user/teams/{teamId}/members/{userId}"
         let teamIdPreEscape = "\(APIHelper.mapValueToPathItem(teamId))"
         let teamIdPostEscape = teamIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -214,8 +214,8 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userDeleteTeam(teamId: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Team?, _ error: Error?) -> Void)) {
-        userDeleteTeamWithRequestBuilder(teamId: teamId).execute(apiResponseQueue) { result -> Void in
+    open class func deleteTeam(teamId: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Team?, _ error: Error?) -> Void)) {
+        deleteTeamWithRequestBuilder(teamId: teamId).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -235,7 +235,7 @@ open class TeamsAPI {
      - parameter teamId: (path) The team ID 
      - returns: RequestBuilder<Team> 
      */
-    open class func userDeleteTeamWithRequestBuilder(teamId: String) -> RequestBuilder<Team> {
+    open class func deleteTeamWithRequestBuilder(teamId: String) -> RequestBuilder<Team> {
         var path = "/user/teams/{teamId}"
         let teamIdPreEscape = "\(APIHelper.mapValueToPathItem(teamId))"
         let teamIdPostEscape = teamIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -264,8 +264,8 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userGenerateInvite(teamId: String, body: InviteRequest, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Invite?, _ error: Error?) -> Void)) {
-        userGenerateInviteWithRequestBuilder(teamId: teamId, body: body).execute(apiResponseQueue) { result -> Void in
+    open class func generateInvite(teamId: String, body: InviteRequest, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Invite?, _ error: Error?) -> Void)) {
+        generateInviteWithRequestBuilder(teamId: teamId, body: body).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -286,7 +286,7 @@ open class TeamsAPI {
      - parameter body: (body)  
      - returns: RequestBuilder<Invite> 
      */
-    open class func userGenerateInviteWithRequestBuilder(teamId: String, body: InviteRequest) -> RequestBuilder<Invite> {
+    open class func generateInviteWithRequestBuilder(teamId: String, body: InviteRequest) -> RequestBuilder<Invite> {
         var path = "/user/teams/{teamId}/invites"
         let teamIdPreEscape = "\(APIHelper.mapValueToPathItem(teamId))"
         let teamIdPostEscape = teamIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -314,8 +314,8 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userListInvites(teamId: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: InviteList?, _ error: Error?) -> Void)) {
-        userListInvitesWithRequestBuilder(teamId: teamId).execute(apiResponseQueue) { result -> Void in
+    open class func listInvites(teamId: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: InviteList?, _ error: Error?) -> Void)) {
+        listInvitesWithRequestBuilder(teamId: teamId).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -335,7 +335,7 @@ open class TeamsAPI {
      - parameter teamId: (path) The team ID 
      - returns: RequestBuilder<InviteList> 
      */
-    open class func userListInvitesWithRequestBuilder(teamId: String) -> RequestBuilder<InviteList> {
+    open class func listInvitesWithRequestBuilder(teamId: String) -> RequestBuilder<InviteList> {
         var path = "/user/teams/{teamId}/invites"
         let teamIdPreEscape = "\(APIHelper.mapValueToPathItem(teamId))"
         let teamIdPostEscape = teamIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -362,8 +362,8 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userListTeams(apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: TeamList?, _ error: Error?) -> Void)) {
-        userListTeamsWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+    open class func listTeams(apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: TeamList?, _ error: Error?) -> Void)) {
+        listTeamsWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -382,7 +382,7 @@ open class TeamsAPI {
        - name: APIToken
      - returns: RequestBuilder<TeamList> 
      */
-    open class func userListTeamsWithRequestBuilder() -> RequestBuilder<TeamList> {
+    open class func listTeamsWithRequestBuilder() -> RequestBuilder<TeamList> {
         let path = "/user/teams"
         let URLString = UserAPI.basePath + path
         let parameters: [String: Any]? = nil
@@ -408,8 +408,8 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userRetrieveInvite(teamId: String, code: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Invite?, _ error: Error?) -> Void)) {
-        userRetrieveInviteWithRequestBuilder(teamId: teamId, code: code).execute(apiResponseQueue) { result -> Void in
+    open class func retrieveInvite(teamId: String, code: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Invite?, _ error: Error?) -> Void)) {
+        retrieveInviteWithRequestBuilder(teamId: teamId, code: code).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -430,7 +430,7 @@ open class TeamsAPI {
      - parameter code: (path) The invite code. 
      - returns: RequestBuilder<Invite> 
      */
-    open class func userRetrieveInviteWithRequestBuilder(teamId: String, code: String) -> RequestBuilder<Invite> {
+    open class func retrieveInviteWithRequestBuilder(teamId: String, code: String) -> RequestBuilder<Invite> {
         var path = "/user/teams/{teamId}/invites/{code}"
         let teamIdPreEscape = "\(APIHelper.mapValueToPathItem(teamId))"
         let teamIdPostEscape = teamIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -462,8 +462,8 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userRetrieveMember(teamId: String, userId: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Member?, _ error: Error?) -> Void)) {
-        userRetrieveMemberWithRequestBuilder(teamId: teamId, userId: userId).execute(apiResponseQueue) { result -> Void in
+    open class func retrieveMember(teamId: String, userId: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Member?, _ error: Error?) -> Void)) {
+        retrieveMemberWithRequestBuilder(teamId: teamId, userId: userId).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -483,7 +483,7 @@ open class TeamsAPI {
      - parameter userId: (path) The user ID 
      - returns: RequestBuilder<Member> 
      */
-    open class func userRetrieveMemberWithRequestBuilder(teamId: String, userId: String) -> RequestBuilder<Member> {
+    open class func retrieveMemberWithRequestBuilder(teamId: String, userId: String) -> RequestBuilder<Member> {
         var path = "/user/teams/{teamId}/members/{userId}"
         let teamIdPreEscape = "\(APIHelper.mapValueToPathItem(teamId))"
         let teamIdPostEscape = teamIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -514,8 +514,8 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userRetrieveTeam(teamId: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Team?, _ error: Error?) -> Void)) {
-        userRetrieveTeamWithRequestBuilder(teamId: teamId).execute(apiResponseQueue) { result -> Void in
+    open class func retrieveTeam(teamId: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Team?, _ error: Error?) -> Void)) {
+        retrieveTeamWithRequestBuilder(teamId: teamId).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -534,7 +534,7 @@ open class TeamsAPI {
      - parameter teamId: (path) The team ID 
      - returns: RequestBuilder<Team> 
      */
-    open class func userRetrieveTeamWithRequestBuilder(teamId: String) -> RequestBuilder<Team> {
+    open class func retrieveTeamWithRequestBuilder(teamId: String) -> RequestBuilder<Team> {
         var path = "/user/teams/{teamId}"
         let teamIdPreEscape = "\(APIHelper.mapValueToPathItem(teamId))"
         let teamIdPostEscape = teamIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -562,8 +562,8 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userRetrieveTeamMembers(teamId: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: MemberList?, _ error: Error?) -> Void)) {
-        userRetrieveTeamMembersWithRequestBuilder(teamId: teamId).execute(apiResponseQueue) { result -> Void in
+    open class func retrieveTeamMembers(teamId: String, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: MemberList?, _ error: Error?) -> Void)) {
+        retrieveTeamMembersWithRequestBuilder(teamId: teamId).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -582,7 +582,7 @@ open class TeamsAPI {
      - parameter teamId: (path) The team ID 
      - returns: RequestBuilder<MemberList> 
      */
-    open class func userRetrieveTeamMembersWithRequestBuilder(teamId: String) -> RequestBuilder<MemberList> {
+    open class func retrieveTeamMembersWithRequestBuilder(teamId: String) -> RequestBuilder<MemberList> {
         var path = "/user/teams/{teamId}/members"
         let teamIdPreEscape = "\(APIHelper.mapValueToPathItem(teamId))"
         let teamIdPostEscape = teamIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -612,8 +612,8 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userUpdateMember(teamId: String, userId: String, body: Member, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Member?, _ error: Error?) -> Void)) {
-        userUpdateMemberWithRequestBuilder(teamId: teamId, userId: userId, body: body).execute(apiResponseQueue) { result -> Void in
+    open class func updateMember(teamId: String, userId: String, body: Member, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Member?, _ error: Error?) -> Void)) {
+        updateMemberWithRequestBuilder(teamId: teamId, userId: userId, body: body).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -635,7 +635,7 @@ open class TeamsAPI {
      - parameter body: (body)  
      - returns: RequestBuilder<Member> 
      */
-    open class func userUpdateMemberWithRequestBuilder(teamId: String, userId: String, body: Member) -> RequestBuilder<Member> {
+    open class func updateMemberWithRequestBuilder(teamId: String, userId: String, body: Member) -> RequestBuilder<Member> {
         var path = "/user/teams/{teamId}/members/{userId}"
         let teamIdPreEscape = "\(APIHelper.mapValueToPathItem(teamId))"
         let teamIdPostEscape = teamIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -667,8 +667,8 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func userUpdateTeam(teamId: String, body: Team, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Team?, _ error: Error?) -> Void)) {
-        userUpdateTeamWithRequestBuilder(teamId: teamId, body: body).execute(apiResponseQueue) { result -> Void in
+    open class func updateTeam(teamId: String, body: Team, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Team?, _ error: Error?) -> Void)) {
+        updateTeamWithRequestBuilder(teamId: teamId, body: body).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -689,7 +689,7 @@ open class TeamsAPI {
      - parameter body: (body)  
      - returns: RequestBuilder<Team> 
      */
-    open class func userUpdateTeamWithRequestBuilder(teamId: String, body: Team) -> RequestBuilder<Team> {
+    open class func updateTeamWithRequestBuilder(teamId: String, body: Team) -> RequestBuilder<Team> {
         var path = "/user/teams/{teamId}"
         let teamIdPreEscape = "\(APIHelper.mapValueToPathItem(teamId))"
         let teamIdPostEscape = teamIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""

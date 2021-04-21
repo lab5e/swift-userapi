@@ -16,7 +16,7 @@ UserAPI.customHeaders["X-API-Token"] = token
 //UserAPI.requestBuilderFactory = BearerRequestBuilderFactory()
 
 // Do the async call. The two parameters are the profile and
-ProfileAPI.userGetUserProfile() { (profile, error) in
+ProfileAPI.getUserProfile() { (profile, error) in
     guard error == nil else {
         if let err = error {
             print("Request failed: ", err)

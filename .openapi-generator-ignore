@@ -1,4 +1,4 @@
 .gitignore
 git_push.sh
-.openapi-generator
+.openapi-generator/
 

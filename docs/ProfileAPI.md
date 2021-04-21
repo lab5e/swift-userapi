@@ -4,12 +4,12 @@ All URIs are relative to *https://api.lab5e.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**userGetUserProfile**](ProfileAPI.md#usergetuserprofile) | **GET** /user/profile | Logged in profile
+[**getUserProfile**](ProfileAPI.md#getuserprofile) | **GET** /user/profile | Logged in profile
 
 
-# **userGetUserProfile**
+# **getUserProfile**
 ```swift
-    open class func userGetUserProfile(completion: @escaping (_ data: UserProfile?, _ error: Error?) -> Void)
+    open class func getUserProfile(completion: @escaping (_ data: UserProfile?, _ error: Error?) -> Void)
 ```
 
 Logged in profile
@@ -23,7 +23,7 @@ import User
 
 
 // Logged in profile
-ProfileAPI.userGetUserProfile() { (response, error) in
+ProfileAPI.getUserProfile() { (response, error) in
     guard error == nil else {
         print(error)
         return

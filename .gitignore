@@ -64,3 +64,4 @@ fastlane/screenshots
 
 git_push.sh
 
+.openapi-generator/
