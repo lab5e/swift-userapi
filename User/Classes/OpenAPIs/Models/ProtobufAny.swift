@@ -9,12 +9,45 @@ import Foundation
 
 public struct ProtobufAny: Codable {
 
-    public var typeUrl: String?
-    public var value: Data?
+    public var type: String?
 
-    public init(typeUrl: String? = nil, value: Data? = nil) {
-        self.typeUrl = typeUrl
-        self.value = value
+    public init(type: String? = nil) {
+        self.type = type
+    }
+    public var additionalProperties: [String: Any] = [:]
+
+    public subscript(key: String) -> Any? {
+        get {
+            if let value = additionalProperties[key] {
+                return value
+            }
+            return nil
+        }
+
+        set {
+            additionalProperties[key] = newValue
+        }
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+
+        var container = encoder.container(keyedBy: String.self)
+
+        try container.encodeIfPresent(type, forKey: "@type")
+        try container.encodeMap(additionalProperties)
+    }
+
+    // Decodable protocol methods
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: String.self)
+
+        type = try container.decodeIfPresent(String.self, forKey: "@type")
+        var nonAdditionalPropertyKeys = Set<String>()
+        nonAdditionalPropertyKeys.insert("@type")
+        additionalProperties = try container.decodeMap(Any.self, excludedKeys: nonAdditionalPropertyKeys)
     }
 
 }

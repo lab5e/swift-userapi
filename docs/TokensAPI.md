@@ -201,7 +201,7 @@ Name | Type | Description  | Notes
 
 # **updateToken**
 ```swift
-    open class func updateToken(token: String, body: Token, completion: @escaping (_ data: Token?, _ error: Error?) -> Void)
+    open class func updateToken(token: String, body: AnAPIToken, completion: @escaping (_ data: Token?, _ error: Error?) -> Void)
 ```
 
 Update token
@@ -212,7 +212,7 @@ Update token
 import User
 
 let token = "token_example" // String | The token  Use this in the `X-API-Token` header when using the API.
-let body = Token(resource: "resource_example", write: false, token: "token_example", tags: "TODO", lastUse: "lastUse_example", uses: "uses_example") // Token | 
+let body = An_API_token(resource: "resource_example", write: false, tags: "TODO", lastUse: "lastUse_example", uses: "uses_example") // AnAPIToken | 
 
 // Update token
 TokensAPI.updateToken(token: token, body: body) { (response, error) in
@@ -232,7 +232,7 @@ TokensAPI.updateToken(token: token, body: body) { (response, error) in
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token** | **String** | The token  Use this in the &#x60;X-API-Token&#x60; header when using the API. | 
- **body** | [**Token**](Token.md) |  | 
+ **body** | [**AnAPIToken**](AnAPIToken.md) |  | 
 
 ### Return type
 

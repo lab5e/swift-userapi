@@ -200,7 +200,7 @@ open class TokensAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateToken(token: String, body: Token, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Token?, _ error: Error?) -> Void)) {
+    open class func updateToken(token: String, body: AnAPIToken, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Token?, _ error: Error?) -> Void)) {
         updateTokenWithRequestBuilder(token: token, body: body).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
@@ -221,7 +221,7 @@ open class TokensAPI {
      - parameter body: (body)  
      - returns: RequestBuilder<Token> 
      */
-    open class func updateTokenWithRequestBuilder(token: String, body: Token) -> RequestBuilder<Token> {
+    open class func updateTokenWithRequestBuilder(token: String, body: AnAPIToken) -> RequestBuilder<Token> {
         var path = "/user/tokens/{token}"
         let tokenPreEscape = "\(APIHelper.mapValueToPathItem(token))"
         let tokenPostEscape = tokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""

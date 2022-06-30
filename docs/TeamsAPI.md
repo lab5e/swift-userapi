@@ -274,7 +274,7 @@ Name | Type | Description  | Notes
 
 # **generateInvite**
 ```swift
-    open class func generateInvite(teamId: String, body: InviteRequest, completion: @escaping (_ data: Invite?, _ error: Error?) -> Void)
+    open class func generateInvite(teamId: String, body: RequestInviteDetails, completion: @escaping (_ data: Invite?, _ error: Error?) -> Void)
 ```
 
 Generate invite
@@ -287,7 +287,7 @@ Update the team. You must be an administrator of the team to edit it.
 import User
 
 let teamId = "teamId_example" // String | The team ID
-let body = InviteRequest(teamId: "teamId_example", code: "code_example") // InviteRequest | 
+let body = Request_invite_details(code: "code_example") // RequestInviteDetails | 
 
 // Generate invite
 TeamsAPI.generateInvite(teamId: teamId, body: body) { (response, error) in
@@ -307,7 +307,7 @@ TeamsAPI.generateInvite(teamId: teamId, body: body) { (response, error) in
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **teamId** | **String** | The team ID | 
- **body** | [**InviteRequest**](InviteRequest.md) |  | 
+ **body** | [**RequestInviteDetails**](RequestInviteDetails.md) |  | 
 
 ### Return type
 
@@ -620,7 +620,7 @@ Name | Type | Description  | Notes
 
 # **updateMember**
 ```swift
-    open class func updateMember(teamId: String, userId: String, body: Member, completion: @escaping (_ data: Member?, _ error: Error?) -> Void)
+    open class func updateMember(teamId: String, userId: String, body: MemberOfATeam, completion: @escaping (_ data: Member?, _ error: Error?) -> Void)
 ```
 
 Update member
@@ -634,7 +634,7 @@ import User
 
 let teamId = "teamId_example" // String | 
 let userId = "userId_example" // String | 
-let body = Member(teamId: "teamId_example", role: "role_example", userId: "userId_example", user: UserProfile(userId: "userId_example", email: "email_example", avatarUrl: "avatarUrl_example", name: "name_example", profileUrl: "profileUrl_example", githubLogin: "githubLogin_example", provider: "provider_example", logoutUrl: "logoutUrl_example")) // Member | 
+let body = Member_of_a_team(role: "role_example", user: UserProfile(userId: "userId_example", email: "email_example", avatarUrl: "avatarUrl_example", name: "name_example", profileUrl: "profileUrl_example", githubLogin: "githubLogin_example", provider: "provider_example", logoutUrl: "logoutUrl_example")) // MemberOfATeam | 
 
 // Update member
 TeamsAPI.updateMember(teamId: teamId, userId: userId, body: body) { (response, error) in
@@ -655,7 +655,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **teamId** | **String** |  | 
  **userId** | **String** |  | 
- **body** | [**Member**](Member.md) |  | 
+ **body** | [**MemberOfATeam**](MemberOfATeam.md) |  | 
 
 ### Return type
 
@@ -674,7 +674,7 @@ Name | Type | Description  | Notes
 
 # **updateTeam**
 ```swift
-    open class func updateTeam(teamId: String, body: Team, completion: @escaping (_ data: Team?, _ error: Error?) -> Void)
+    open class func updateTeam(teamId: String, body: ATeam, completion: @escaping (_ data: Team?, _ error: Error?) -> Void)
 ```
 
 Update team
@@ -687,7 +687,7 @@ Update the team. You must be an administrator of the team to edit it.
 import User
 
 let teamId = "teamId_example" // String | 
-let body = Team(teamId: "teamId_example", isPrivate: false, tags: "TODO", members: [Member(teamId: "teamId_example", role: "role_example", userId: "userId_example", user: UserProfile(userId: "userId_example", email: "email_example", avatarUrl: "avatarUrl_example", name: "name_example", profileUrl: "profileUrl_example", githubLogin: "githubLogin_example", provider: "provider_example", logoutUrl: "logoutUrl_example"))]) // Team | 
+let body = A_team(isPrivate: false, tags: "TODO", members: [Member(teamId: "teamId_example", role: "role_example", userId: "userId_example", user: UserProfile(userId: "userId_example", email: "email_example", avatarUrl: "avatarUrl_example", name: "name_example", profileUrl: "profileUrl_example", githubLogin: "githubLogin_example", provider: "provider_example", logoutUrl: "logoutUrl_example"))]) // ATeam | 
 
 // Update team
 TeamsAPI.updateTeam(teamId: teamId, body: body) { (response, error) in
@@ -707,7 +707,7 @@ TeamsAPI.updateTeam(teamId: teamId, body: body) { (response, error) in
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **teamId** | **String** |  | 
- **body** | [**Team**](Team.md) |  | 
+ **body** | [**ATeam**](ATeam.md) |  | 
 
 ### Return type
 

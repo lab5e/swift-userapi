@@ -264,7 +264,7 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func generateInvite(teamId: String, body: InviteRequest, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Invite?, _ error: Error?) -> Void)) {
+    open class func generateInvite(teamId: String, body: RequestInviteDetails, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Invite?, _ error: Error?) -> Void)) {
         generateInviteWithRequestBuilder(teamId: teamId, body: body).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
@@ -286,7 +286,7 @@ open class TeamsAPI {
      - parameter body: (body)  
      - returns: RequestBuilder<Invite> 
      */
-    open class func generateInviteWithRequestBuilder(teamId: String, body: InviteRequest) -> RequestBuilder<Invite> {
+    open class func generateInviteWithRequestBuilder(teamId: String, body: RequestInviteDetails) -> RequestBuilder<Invite> {
         var path = "/user/teams/{teamId}/invites"
         let teamIdPreEscape = "\(APIHelper.mapValueToPathItem(teamId))"
         let teamIdPostEscape = teamIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -612,7 +612,7 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateMember(teamId: String, userId: String, body: Member, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Member?, _ error: Error?) -> Void)) {
+    open class func updateMember(teamId: String, userId: String, body: MemberOfATeam, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Member?, _ error: Error?) -> Void)) {
         updateMemberWithRequestBuilder(teamId: teamId, userId: userId, body: body).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
@@ -635,7 +635,7 @@ open class TeamsAPI {
      - parameter body: (body)  
      - returns: RequestBuilder<Member> 
      */
-    open class func updateMemberWithRequestBuilder(teamId: String, userId: String, body: Member) -> RequestBuilder<Member> {
+    open class func updateMemberWithRequestBuilder(teamId: String, userId: String, body: MemberOfATeam) -> RequestBuilder<Member> {
         var path = "/user/teams/{teamId}/members/{userId}"
         let teamIdPreEscape = "\(APIHelper.mapValueToPathItem(teamId))"
         let teamIdPostEscape = teamIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -667,7 +667,7 @@ open class TeamsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateTeam(teamId: String, body: Team, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Team?, _ error: Error?) -> Void)) {
+    open class func updateTeam(teamId: String, body: ATeam, apiResponseQueue: DispatchQueue = UserAPI.apiResponseQueue, completion: @escaping ((_ data: Team?, _ error: Error?) -> Void)) {
         updateTeamWithRequestBuilder(teamId: teamId, body: body).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
@@ -689,7 +689,7 @@ open class TeamsAPI {
      - parameter body: (body)  
      - returns: RequestBuilder<Team> 
      */
-    open class func updateTeamWithRequestBuilder(teamId: String, body: Team) -> RequestBuilder<Team> {
+    open class func updateTeamWithRequestBuilder(teamId: String, body: ATeam) -> RequestBuilder<Team> {
         var path = "/user/teams/{teamId}"
         let teamIdPreEscape = "\(APIHelper.mapValueToPathItem(teamId))"
         let teamIdPostEscape = teamIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
